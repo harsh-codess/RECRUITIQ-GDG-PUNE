@@ -113,6 +113,13 @@ The system can highlight potential evaluation biases and encourage fair candidat
 
 ---
 
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/55f4cb1f-94cb-44d1-8542-71cf4131a32f" />
+
+
+
+
+
+
 ## System Architecture
 
 ```text
