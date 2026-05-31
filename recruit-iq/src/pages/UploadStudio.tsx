@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, ArrowRight, Layers, FileText, CheckCircle2, RotateCw } from "lucide-react";
 import Navbar from "../components/Navbar";
 import FileUploadZone from "../components/FileUploadZone";
-import { SAMPLE_JDS, SampleJD } from "../data/mockCandidates";
+import { SAMPLE_JDS, SampleJD, MOCK_CANDIDATES } from "../data/mockCandidates";
 
 export default function UploadStudio() {
   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function UploadStudio() {
   const [activeJDTitle, setActiveJDTitle] = useState<string | null>(null);
 
   // Resume states
-  const [resumes, setResumes] = useState<{ id: string; name: string; size: string }[]>([
+  const [resumes, setResumes] = useState<{ id: string; name: string; size: string; fileObject?: File }[]>([
     { id: "r1", name: "priya_sharma_ml.pdf", size: "142 KB" },
     { id: "r2", name: "rohan_mehta_cv.pdf", size: "115 KB" },
     { id: "r3", name: "aisha_khan_research.pdf", size: "210 KB" },
@@ -36,7 +36,7 @@ export default function UploadStudio() {
     localStorage.setItem("active_jd_company", sample.company);
   };
 
-  const handleAddFiles = (newFiles: { id: string; name: string; size: string }[]) => {
+  const handleAddFiles = (newFiles: { id: string; name: string; size: string; fileObject?: File }[]) => {
     setResumes((prev) => [...prev, ...newFiles]);
   };
 
@@ -44,7 +44,7 @@ export default function UploadStudio() {
     setResumes((prev) => prev.filter((r) => r.id !== id));
   };
 
-  const handleAnalyze = () => {
+  const handleAnalyze = async () => {
     if (!jdText.trim() || resumes.length === 0) return;
 
     // Cache the job specification
@@ -55,28 +55,90 @@ export default function UploadStudio() {
     }
 
     setIsAnalyzing(true);
-    setCurrentMessage("Uploading resumes to Gemini...");
-    
-    // Animate progress bar from 0% to 100% over 3.5s using CSS transition
-    setTimeout(() => {
+    setProgressWidth("10%");
+
+    // Filter to get only files that have fileObject
+    const realFiles = resumes
+      .filter((r) => r.fileObject !== undefined)
+      .map((r) => r.fileObject as File);
+
+    if (realFiles.length === 0) {
+      // Demo mode with mock data
+      setCurrentMessage("Initializing offline evaluation environment...");
+      setProgressWidth("30%");
+      
+      setTimeout(() => {
+        setCurrentMessage("Mapping mock criteria patterns...");
+        setProgressWidth("60%");
+      }, 1000);
+
+      setTimeout(() => {
+        setCurrentMessage("Compiling static reports dossier...");
+        setProgressWidth("90%");
+      }, 2000);
+
+      setTimeout(() => {
+        // Save mock data to local storage so results dashboard reads it
+        localStorage.setItem("ranked_candidates", JSON.stringify(MOCK_CANDIDATES));
+        navigate("/results");
+      }, 3000);
+      
+      return;
+    }
+
+    // Real API mode
+    try {
+      setCurrentMessage("Uploading resumes to FastAPI backend...");
+      setProgressWidth("30%");
+
+      const formData = new FormData();
+      formData.append("jd_text", jdText);
+      realFiles.forEach((file) => {
+        formData.append("resumes", file);
+      });
+
+      // Change messages dynamically to indicate active backend steps
+      const interval = setInterval(() => {
+        setCurrentMessage((prev) => {
+          if (prev.includes("Uploading")) return "Extracting PDF text contents...";
+          if (prev.includes("Extracting")) return "Gemini 1.5 Flash grading candidate fits...";
+          if (prev.includes("Gemini")) return "Normalizing scores & ranking candidates...";
+          return "Finalizing dossier scores...";
+        });
+      }, 2000);
+
+      const response = await fetch("http://localhost:8000/api/rank", {
+        method: "POST",
+        body: formData,
+      });
+
+      clearInterval(interval);
+      setProgressWidth("80%");
+
+      if (!response.ok) {
+        throw new Error(`Server returned status ${response.status}`);
+      }
+
+      setCurrentMessage("Recruitment reports generated!");
       setProgressWidth("100%");
-    }, 50);
+      
+      const rankedCandidates = await response.json();
+      localStorage.setItem("ranked_candidates", JSON.stringify(rankedCandidates));
 
-    setTimeout(() => {
-      setCurrentMessage("Extracting job requirements...");
-    }, 1000);
+      setTimeout(() => {
+        navigate("/results");
+      }, 800);
 
-    setTimeout(() => {
-      setCurrentMessage("Analyzing candidate profiles...");
-    }, 2000);
-
-    setTimeout(() => {
-      setCurrentMessage("Ranking by fit score...");
-    }, 3000);
-
-    setTimeout(() => {
-      navigate("/results");
-    }, 3500);
+    } catch (error) {
+      console.error("Failed to fetch ranked candidates from backend:", error);
+      setCurrentMessage("Backend connection failed! Falling back to offline simulation...");
+      setProgressWidth("95%");
+      
+      setTimeout(() => {
+        localStorage.setItem("ranked_candidates", JSON.stringify(MOCK_CANDIDATES));
+        navigate("/results");
+      }, 2000);
+    }
   };
 
   const isFormValid = jdText.trim().length > 0 && resumes.length > 0;
