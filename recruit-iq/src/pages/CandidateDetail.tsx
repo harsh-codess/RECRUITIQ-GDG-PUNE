@@ -13,8 +13,13 @@ export default function CandidateDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const currentIndex = MOCK_CANDIDATES.findIndex((c) => c.id === id);
-  const candidate = MOCK_CANDIDATES[currentIndex];
+  const [candidates] = useState<any[]>(() => {
+    const stored = localStorage.getItem("ranked_candidates");
+    return stored ? JSON.parse(stored) : MOCK_CANDIDATES;
+  });
+
+  const currentIndex = candidates.findIndex((c) => c.id === id);
+  const candidate = candidates[currentIndex];
 
   // Tab State: 'technical' or 'behavioral'
   const [activeTab, setActiveTab] = useState<'technical' | 'behavioral'>('technical');
@@ -52,8 +57,8 @@ export default function CandidateDetail() {
   }
 
   // Next and Previous indexes
-  const prevCandidate = currentIndex > 0 ? MOCK_CANDIDATES[currentIndex - 1] : null;
-  const nextCandidate = currentIndex < MOCK_CANDIDATES.length - 1 ? MOCK_CANDIDATES[currentIndex + 1] : null;
+  const prevCandidate = currentIndex > 0 ? candidates[currentIndex - 1] : null;
+  const nextCandidate = currentIndex < candidates.length - 1 ? candidates[currentIndex + 1] : null;
 
   // Question copy mechanics
   const handleCopyQuestion = (text: string, index: number) => {
