@@ -5,6 +5,7 @@ interface UploadedFile {
   id: string;
   name: string;
   size: string;
+  fileObject?: File;
 }
 
 interface FileUploadZoneProps {
@@ -30,7 +31,8 @@ export default function FileUploadZone({ files, onAddFiles, onRemoveFile }: File
     const parsed: UploadedFile[] = Array.from(fileList).map((f, i) => ({
       id: `file-${Date.now()}-${i}-${Math.random().toString(36).substr(2, 4)}`,
       name: f.name,
-      size: `${Math.round(f.size / 1024)} KB`
+      size: `${Math.round(f.size / 1024)} KB`,
+      fileObject: f
     }));
     onAddFiles(parsed);
   };
