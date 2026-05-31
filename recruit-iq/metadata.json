@@ -1,0 +1,6 @@
+{
+  "name": "Recruit IQ",
+  "description": "An AI-powered candidate ranking platform built for GDG Hackathon.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
