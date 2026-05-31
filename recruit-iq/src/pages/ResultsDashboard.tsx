@@ -4,27 +4,35 @@ import { motion, AnimatePresence } from "motion/react";
 import { Sliders, RotateCw, Filter, Shield, Info, ArrowUpRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import CandidateCard from "../components/CandidateCard";
-import { MOCK_CANDIDATES } from "../data/mockCandidates";
+import { MOCK_CANDIDATES, Candidate } from "../data/mockCandidates";
 
 export default function ResultsDashboard() {
   // Retain the JD title from storage
   const [jdTitle, setJdTitle] = useState("Senior Machine Learning Engineer");
   const [jdCompany, setJdCompany] = useState("Flipkart");
   const [scoreThreshold, setScoreThreshold] = useState(60); // Default threshold parameter in instructions is 60
+  const [candidates, setCandidates] = useState<Candidate[]>([]);
 
   useEffect(() => {
     const title = localStorage.getItem("active_jd_title");
     const company = localStorage.getItem("active_jd_company");
     if (title) setJdTitle(title);
     if (company) setJdCompany(company);
+
+    const stored = localStorage.getItem("ranked_candidates");
+    if (stored) {
+      setCandidates(JSON.parse(stored));
+    } else {
+      setCandidates(MOCK_CANDIDATES);
+    }
   }, []);
 
   // Filter & sort candidates by score descending
-  const filteredCandidates = MOCK_CANDIDATES.filter((c) => c.scores.overall_score >= scoreThreshold);
+  const filteredCandidates = candidates.filter((c) => c.scores.overall_score >= scoreThreshold);
   const sortedCandidates = [...filteredCandidates].sort((a, b) => b.scores.overall_score - a.scores.overall_score);
 
   // Stats
-  const totalOriginalCount = MOCK_CANDIDATES.length;
+  const totalOriginalCount = candidates.length;
   const passedCount = filteredCandidates.length;
 
   return (
@@ -141,8 +149,8 @@ export default function ResultsDashboard() {
               </motion.div>
             ) : (
               sortedCandidates.map((cand, index) => {
-                // Determine the logical ranking rank number based on overall sorted position in MOCK_CANDIDATES
-                const globalRankNum = MOCK_CANDIDATES.findIndex(c => c.id === cand.id) + 1;
+                // Determine the logical ranking rank number based on overall sorted position in candidates
+                const globalRankNum = candidates.findIndex(c => c.id === cand.id) + 1;
 
                 return (
                   <CandidateCard
