@@ -4,7 +4,6 @@
 ### AI-Powered Resume Screening & Ranking Engine
 **Built for Google Developer Groups Hackathon · Pune 2026**
 
-![Architecture](./IMAGES/ARCHITECTURE.png)
 
 </div>
 
