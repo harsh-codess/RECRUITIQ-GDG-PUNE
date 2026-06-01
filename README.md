@@ -59,23 +59,6 @@ The system is a 7-step pipeline:
 
 ---
 
-## 📂 Repository Structure
-
-```
-APL-GDG-PUNE/
-├── scorer.py              # ⭐ Candidate ranking engine (this repo)
-├── assets/
-│   ├── ARCHITECTURE.png   # Full system architecture diagram
-│   ├── ss1.png            # Upload Studio screenshot
-│   ├── ss2.png            # Results leaderboard screenshot
-│   └── POC.mp4            # End-to-end POC video
-└── README.md
-```
-
-> **Note:** The other modules (`app.py`, `main.py`, `pdf_parser.py`, `gemini_client.py`) are maintained by other team members and live in their respective repositories.
-
----
-
 ## ⭐ scorer.py — Ranking Engine Deep Dive
 
 `scorer.py` is the brain of the ranking pipeline. It is the **only module** that `main.py` calls to go from raw Gemini responses → a clean, ranked list.
@@ -159,16 +142,6 @@ The test block covers:
 - ✅ Malformed JSON → skip + warn
 - ✅ Missing `overall_score` → skip + warn
 - ✅ Tied scores → sequential ranking
-
----
-
-## 👥 Team
-
-| Member | Module |
-|--------|--------|
-| Harsh | `scorer.py` — Ranking Engine |
-| Ansh | Gemini agents — `gemini_client.py` |
-| *(teammates)* | `app.py`, `main.py`, `pdf_parser.py` |
 
 ---
 
