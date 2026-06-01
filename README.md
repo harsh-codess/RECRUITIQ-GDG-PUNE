@@ -11,9 +11,9 @@
 
 ## 📌 What is Recruit IQ?
 
-**Recruit IQ** is an intelligent recruiter assistant that eliminates the manual effort of resume screening. A recruiter pastes a Job Description, uploads a batch of candidate PDFs, and within seco[...]
+**Recruit IQ** is an intelligent recruiter assistant that eliminates the manual effort of resume screening. A recruiter pastes a Job Description, uploads a batch of candidate PDFs, and within seconds gets a ranked shortlist.
 
-The system doesn't just match keywords. It understands context, infers candidate strength, and provides a hiring verdict (`Strong Hire / Hire / Maybe / No Hire`) with a one-liner rationale for eve[...]
+The system doesn't just match keywords. It understands context, infers candidate strength, and provides a hiring verdict (`Strong Hire / Hire / Maybe / No Hire`) with a one-liner rationale for every candidate.
 
 ---
 
@@ -32,14 +32,14 @@ The system doesn't just match keywords. It understands context, infers candidate
 ### Upload Studio — Configure JD & Upload Resumes
 ![Upload Studio](./assets/ss1.png)
 
-> The recruiter pastes the full Job Description (or uses a quick-seed template for roles like *Senior ML Engineer at Flipkart* or *Lead AI Researcher at IIT Bombay Hub*), then uploads a batch of c[...]
+> The recruiter pastes the full Job Description (or uses a quick-seed template for roles like *Senior ML Engineer at Flipkart* or *Lead AI Researcher at IIT Bombay Hub*), then uploads a batch of candidate PDFs for evaluation.
 
 ---
 
 ### Results — Ranked Candidate Leaderboard
 ![Ranked Leaderboard](./assets/ss2.png)
 
-> After Gemini evaluates each candidate, the leaderboard shows candidates ranked by AI score with verdicts like **Strong Hire (91%)**, **Hire (87%)**, etc. Each card includes the candidate's curre[...]
+> After Gemini evaluates each candidate, the leaderboard shows candidates ranked by AI score with verdicts like **Strong Hire (91%)**, **Hire (87%)**, etc. Each card includes the candidate's current role and a one-line justification.
 
 ---
 
