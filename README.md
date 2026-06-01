@@ -21,9 +21,9 @@ The system doesn't just match keywords. It understands context, infers candidate
 
 > ▶️ **Screen Recording** — see the full end-to-end flow:
 
-> [![Play Screen Recording](./assets/ss1.png)](./assets/POC.mp4)
+> [![Watch the demo on YouTube](https://img.youtube.com/vi/l4NXQKvVa-0/hqdefault.jpg)](https://youtu.be/l4NXQKvVa-0)
 
-> Click to download/play: [`assets/POC.mp4`](./assets/POC.mp4)
+> Watch on YouTube: [https://youtu.be/l4NXQKvVa-0](https://youtu.be/l4NXQKvVa-0)
 
 ---
 
