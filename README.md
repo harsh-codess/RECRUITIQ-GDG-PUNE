@@ -19,11 +19,9 @@ The system doesn't just match keywords. It understands context, infers candidate
 
 ## 🚀 Live Demo (POC)
 
-> ▶️ **Screen Recording** — see the full end-to-end flow:
+▶️ **Screen Recording** — see the full end-to-end flow:
 
-> [![Watch the demo on YouTube](https://img.youtube.com/vi/l4NXQKvVa-0/hqdefault.jpg)](https://youtu.be/l4NXQKvVa-0)
-
-> Watch on YouTube: [https://youtu.be/l4NXQKvVa-0](https://youtu.be/l4NXQKvVa-0)
+[![RecruiterAI Demo](https://img.youtube.com/vi/I4NXQKvVa-0/maxresdefault.jpg)](https://youtu.be/I4NXQKvVa-0)
 
 ---
 
