@@ -1,7 +1,7 @@
 <div align="center">
 
 # ✦ Recruit IQ
-### AI-Powered Resume Screening & Ranking Engine
+### AI-Powered Resume Screening & Ranking Engine 
 **Built for Google Developer Groups Hackathon · Pune 2026**
 
 
@@ -43,115 +43,56 @@ The system doesn't just match keywords. It understands context, infers candidate
 
 ## 🏗️ System Architecture
 
-The system is a 7-step pipeline:
-
-| Step | Module | Responsibility |
-|------|--------|----------------|
-| 1 | `app.py` (Streamlit Frontend) | Recruiter inputs Job Description + uploads PDF resumes |
-| 2 | `main.py` (FastAPI Backend) | Receives `jd_text` + `resume_files` at `POST /rank` |
-| 3 | `pdf_parser.py` | Extracts raw text from each PDF using `pdfplumber` |
-| 4 | `gemini_client.py` | Sends JD + resume text to Gemini 1.5 Flash → structured JSON evaluation |
-| 5 | **`scorer.py`** ⭐ | Parses, validates, normalizes scores, and ranks all candidates |
-| 6 | `main.py` (FastAPI Backend) | Returns ranked candidates JSON to frontend |
-| 7 | `app.py` (Streamlit Frontend) | Renders ranked candidate cards with score, verdict, one-liner |
-
 ![System Architecture](./assets/ARCHITECTURE.png)
 
----
+## ✨ Features
 
-## ⭐ scorer.py — Ranking Engine Deep Dive
-
-`scorer.py` is the brain of the ranking pipeline. It is the **only module** that `main.py` calls to go from raw Gemini responses → a clean, ranked list.
-
-### Public API
-
-```python
-from scorer import aggregate_results
-
-results = aggregate_results(candidates)
-# candidates: list of {"filename": str, "gemini_response": str}
-# returns:    list of ranked dicts with candidate_name + rank at top level
-```
-
-### What it does
-
-1. **Strips markdown fences** — Gemini sometimes wraps JSON in ` ```json ``` ` blocks. These are stripped automatically before parsing.
-2. **Parses JSON** — Uses Python's standard `json` module. Invalid JSON is skipped with a warning; the pipeline never crashes.
-3. **Validates required fields** — Checks for `scores.overall_score`, `candidate_profile`, `final_recommendation.verdict`, and `final_recommendation.one_liner`. Missing fields → skip + warn.
-4. **Resolves candidate name** — Uses `candidate_profile.name` if present and non-empty, otherwise falls back to the PDF filename (`.pdf` stripped).
-5. **Normalizes and ranks** — Sorts by `overall_score` descending (handles both `int` and `float`). Assigns sequential `rank` starting at 1. Ties get sequential ranks in sort order.
-
-### Gemini JSON Contract
-
-Every agent's Gemini response **must** include these fields at minimum:
-
-```json
-{
-  "scores": {
-    "overall_score": 91
-  },
-  "candidate_profile": {
-    "name": "Aisha Khan"
-  },
-  "final_recommendation": {
-    "verdict": "Strong Hire",
-    "one_liner": "Rare combination of research depth and production readiness."
-  }
-}
-```
-
-Additional fields (`technical_score`, `soft_skills`, `strengths`, `concerns`, `interview_questions`, etc.) are preserved untouched in the output.
-
-### Dependencies
-
-```
-json   # standard library
-re     # standard library
-```
-
-Zero third-party dependencies. No file I/O. No API calls.
+- **Deep JD Understanding** — extracts skills, experience level, responsibilities, and success criteria
+- **Holistic Candidate Scoring** — evaluates career trajectory, skill depth, impact signals — not just keywords
+- **Transparent Ranking** — every candidate gets a 0-100 fit score with clear reasoning
+- **Explainable Shortlists** — strengths, concerns, and severity levels per candidate
+- **Interview Question Generator** — tailored technical and behavioral questions per candidate
+- **Verdict System** — Strong Hire / Hire / Maybe / No Hire / Strong No Hire
+- **PDF Resume Support** — drag and drop multi-PDF upload with instant text extraction
 
 ---
 
-## 🧪 Running Tests
+## 🛠️ Tech Stack
 
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 18, Vite, Tailwind CSS, Framer Motion |
+| Backend | FastAPI, Python, pdfplumber |
+| AI | Google Gemini 2.0 Flash |
+| PDF Parsing | pdfplumber |
+| State | localStorage (client-side) |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Python 3.10+
+- Node.js 18+
+- Google Gemini API Key → [aistudio.google.com](https://aistudio.google.com)
+
+### Backend
 ```bash
-python3 scorer.py
+cd backend
+pip install -r requirements.txt
+cp .env.example .env   # add your GEMINI_API_KEY
+uvicorn main:app --reload
 ```
 
-Expected output:
-```
-============================================================
-RecruiterAI — scorer.py test run
-============================================================
-[WARNING] Skipping 'malformed.pdf': invalid JSON — ...
-[WARNING] Skipping 'diana_prince.pdf': missing required field 'scores.overall_score'.
-
-── Final ranked results ──
-  Rank  1 | score=   85 | name=Alice Johnson
-  Rank  2 | score=   85 | name=Bob Smith
-  Rank  3 | score=   72 | name=charlie_doe
-
-✅  All assertions passed.
+### Frontend
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-The test block covers:
-- ✅ Clean JSON with full schema
-- ✅ Markdown-fenced JSON (` ```json ``` `)
-- ✅ Missing `candidate_profile.name` → filename fallback
-- ✅ Malformed JSON → skip + warn
-- ✅ Missing `overall_score` → skip + warn
-- ✅ Tied scores → sequential ranking
+Frontend runs on `http://localhost:5173` — Backend on `http://localhost:8000`
 
----
-
-## 🏷️ Event
-
-Built at the **Google Developer Groups Hackathon — Pune 2026**  
-Theme: *AI-Powered Developer Tools using Google AI Stack*  
-Stack: `Gemini 3.5 Flash`, `FastAPI`, `Streamlit`, `pdfplumber`, `Python`
-
----
 
 <div align="center">
   <sub>Recruit IQ · GDG Pune 2026 · Powered by Gemini</sub>
