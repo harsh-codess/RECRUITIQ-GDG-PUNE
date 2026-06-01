@@ -12,9 +12,10 @@ interface CandidateCardProps {
   oneLiner: string;
   rankIndex: number;
   key?: string | number;
+  onViewDetails?: () => void;
 }
 
-export default function CandidateCard({ id, name, role, score, verdict, oneLiner, rankIndex }: CandidateCardProps) {
+export default function CandidateCard({ id, name, role, score, verdict, oneLiner, rankIndex, onViewDetails }: CandidateCardProps) {
   // Rank index displayed as two-digit padded number e.g. #01, #02
   const formattedRank = String(rankIndex).padStart(2, "0");
 
@@ -69,6 +70,7 @@ export default function CandidateCard({ id, name, role, score, verdict, oneLiner
         {/* Action Trigger */}
         <Link 
           to={`/candidate/${id}`}
+          onClick={onViewDetails}
           className="px-4 py-2 border-2 border-[#4285F4] text-[#4285F4] hover:bg-[#4285F4] hover:text-white rounded-full text-xs font-bold font-sans uppercase tracking-wider flex items-center gap-1.5 transition-all shrink-0 self-stretch sm:self-auto text-center justify-center"
         >
           View Details

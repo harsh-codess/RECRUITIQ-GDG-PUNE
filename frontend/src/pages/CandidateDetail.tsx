@@ -7,14 +7,26 @@ import {
 import Navbar from "../components/Navbar";
 import ScoreDonut from "../components/ScoreDonut";
 import { VerdictBadge } from "../components/ScoreBadge";
-import { MOCK_CANDIDATES } from "../data/mockCandidates";
+import { Candidate } from "../data/mockCandidates";
 
 export default function CandidateDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const currentIndex = MOCK_CANDIDATES.findIndex((c) => c.id === id);
-  const candidate = MOCK_CANDIDATES[currentIndex];
+  const [candidate, setCandidate] = useState<Candidate | null>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem("recruiteriq_selected_candidate");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        if (parsed && parsed.id === id) {
+          setCandidate(parsed);
+        }
+      } catch {}
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [id]);
 
   // Tab State: 'technical' or 'behavioral'
   const [activeTab, setActiveTab] = useState<'technical' | 'behavioral'>('technical');
@@ -23,10 +35,7 @@ export default function CandidateDetail() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null);
   const [copiedAll, setCopiedAll] = useState(false);
 
-  // Scroll on view
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [id]);
+
 
   if (!candidate) {
     return (
@@ -35,7 +44,7 @@ export default function CandidateDetail() {
         <div className="flex-grow flex items-center justify-center p-6">
           <div className="max-w-md p-8 text-center bg-[#F8F9FA] border-2 border-[#EA4335]/30 rounded-3xl">
             <ShieldAlert className="w-12 h-12 text-[#EA4335] mx-auto mb-4" />
-            <h2 className="text-2xl font-black text-[#202124] tracking-tight">Profile Reference Unavailable</h2>
+            <h2 className="text-2xl font-black text-[#202124] tracking-tight">No candidate selected</h2>
             <p className="text-xs text-[#5F6368] mt-2 mb-6 leading-relaxed">
               The targeted candidate segment was not recovered in active buffer datasets. Please return to the results portal or upload new dossier contents.
             </p>
@@ -52,8 +61,18 @@ export default function CandidateDetail() {
   }
 
   // Next and Previous indexes
-  const prevCandidate = currentIndex > 0 ? MOCK_CANDIDATES[currentIndex - 1] : null;
-  const nextCandidate = currentIndex < MOCK_CANDIDATES.length - 1 ? MOCK_CANDIDATES[currentIndex + 1] : null;
+  let prevCandidate: Candidate | null = null;
+  let nextCandidate: Candidate | null = null;
+  const storedResults = localStorage.getItem("recruiteriq_results");
+  if (storedResults) {
+    try {
+      const parsed = JSON.parse(storedResults);
+      const incoming = Array.isArray(parsed?.candidates) ? parsed.candidates : [];
+      const cIndex = incoming.findIndex((c: any) => c.id === id);
+      if (cIndex > 0) prevCandidate = incoming[cIndex - 1];
+      if (cIndex >= 0 && cIndex < incoming.length - 1) nextCandidate = incoming[cIndex + 1];
+    } catch {}
+  }
 
   // Question copy mechanics
   const handleCopyQuestion = (text: string, index: number) => {
@@ -329,7 +348,10 @@ export default function CandidateDetail() {
               {prevCandidate ? (
                 <button
                   type="button"
-                  onClick={() => navigate(`/candidate/${prevCandidate.id}`)}
+                  onClick={() => {
+                    localStorage.setItem("recruiteriq_selected_candidate", JSON.stringify(prevCandidate));
+                    navigate(`/candidate/${prevCandidate?.id}`);
+                  }}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 text-[10px] sm:text-xs font-sans font-bold uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3 bg-white border-2 border-[#E8EAED] hover:border-[#202124] rounded-full transition-all text-[#202124] cursor-pointer"
                 >
                   <ChevronLeft className="w-3.5 h-3.5" />
@@ -350,7 +372,10 @@ export default function CandidateDetail() {
               {nextCandidate ? (
                 <button
                   type="button"
-                  onClick={() => navigate(`/candidate/${nextCandidate.id}`)}
+                  onClick={() => {
+                    localStorage.setItem("recruiteriq_selected_candidate", JSON.stringify(nextCandidate));
+                    navigate(`/candidate/${nextCandidate?.id}`);
+                  }}
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 text-[10px] sm:text-xs font-sans font-bold uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3 bg-white border-2 border-[#E8EAED] hover:border-[#202124] rounded-full transition-all text-[#202124] cursor-pointer"
                 >
                   <span>
