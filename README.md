@@ -11,7 +11,7 @@
 
 ## 📌 What is Recruit IQ?
 
-**Recruit IQ** is an intelligent recruiter assistant that eliminates the manual effort of resume screening. A recruiter pastes a Job Description, uploads a batch of candidate PDFs, and within seconds receives a ranked leaderboard of the best-fit candidates — each evaluated, scored, and explained by **Gemini 1.5 Flash** via Google AI Studio.
+**Recruit IQ** is an intelligent recruiter assistant that eliminates the manual effort of resume screening. A recruiter pastes a Job Description, uploads a batch of candidate PDFs, and within seconds receives a ranked leaderboard of the best-fit candidates — each evaluated, scored, and explained by **Gemini 3.5 Flash** via Google AI Studio.
 
 The system doesn't just match keywords. It understands context, infers candidate strength, and provides a hiring verdict (`Strong Hire / Hire / Maybe / No Hire`) with a one-liner rationale for every candidate — making it a true AI co-pilot for talent acquisition.
 
@@ -22,11 +22,9 @@ The system doesn't just match keywords. It understands context, infers candidate
 > ▶️ **Screen Recording** — see the full end-to-end flow:
 > ▶️ **Screen Recording** — see the full end-to-end flow:
 
-> <video controls width="720" height="405" poster="./IMAGES/ss1.png">
->   <source src="./IMAGES/Screen%20Recording%202026-05-31%20at%2010.21.21%20PM.mov" type="video/quicktime">
->   Your browser does not support the video tag. Click to download/play:
->   [`IMAGES/Screen Recording 2026-05-31 at 10.21.21 PM.mov`](./IMAGES/Screen%20Recording%202026-05-31%20at%2010.21.21%20PM.mov)
-> </video>
+> [![Play Screen Recording](./IMAGES/ss1.png)](./IMAGES/Screen%20Recording%202026-05-31%20at%2010.21.21%20PM.mov)
+
+> Click to download/play: [`IMAGES/Screen Recording 2026-05-31 at 10.21.21 PM.mov`](./IMAGES/Screen%20Recording%202026-05-31%20at%2010.21.21%20PM.mov)
 
 ---
 
