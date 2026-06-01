@@ -11,13 +11,15 @@
 
 ## 📌 What is Recruit IQ?
 
-**Recruit IQ** is an intelligent recruiter assistant that eliminates the manual effort of resume screening. A recruiter pastes a Job Description, uploads a batch of candidate PDFs, and within seconds receives a ranked leaderboard of the best-fit candidates — each evaluated, scored, and explained by **Gemini 3.5 Flash** via Google AI Studio.
+**Recruit IQ** is an intelligent recruiter assistant that eliminates the manual effort of resume screening. A recruiter pastes a Job Description, uploads a batch of candidate PDFs, and within seco[...]
 
-The system doesn't just match keywords. It understands context, infers candidate strength, and provides a hiring verdict (`Strong Hire / Hire / Maybe / No Hire`) with a one-liner rationale for every candidate — making it a true AI co-pilot for talent acquisition.
+The system doesn't just match keywords. It understands context, infers candidate strength, and provides a hiring verdict (`Strong Hire / Hire / Maybe / No Hire`) with a one-liner rationale for eve[...]
 
 ---
 
 ## 🚀 Live Demo (POC)
+
+**Deployed App:** **https://recruitiq-gdg-pune.vercel.app**
 
 ▶️ **Screen Recording (Full Demo on YouTube)** — please watch the full end-to-end demo on YouTube:
 
@@ -30,14 +32,14 @@ The system doesn't just match keywords. It understands context, infers candidate
 ### Upload Studio — Configure JD & Upload Resumes
 ![Upload Studio](./assets/ss1.png)
 
-> The recruiter pastes the full Job Description (or uses a quick-seed template for roles like *Senior ML Engineer at Flipkart* or *Lead AI Researcher at IIT Bombay Hub*), then uploads a batch of candidate PDF resumes. The system confirms readiness before triggering evaluation.
+> The recruiter pastes the full Job Description (or uses a quick-seed template for roles like *Senior ML Engineer at Flipkart* or *Lead AI Researcher at IIT Bombay Hub*), then uploads a batch of c[...]
 
 ---
 
 ### Results — Ranked Candidate Leaderboard
 ![Ranked Leaderboard](./assets/ss2.png)
 
-> After Gemini evaluates each candidate, the leaderboard shows candidates ranked by AI score with verdicts like **Strong Hire (91%)**, **Hire (87%)**, etc. Each card includes the candidate's current role, a one-liner AI evaluation, and a "View Details" button for the full breakdown.
+> After Gemini evaluates each candidate, the leaderboard shows candidates ranked by AI score with verdicts like **Strong Hire (91%)**, **Hire (87%)**, etc. Each card includes the candidate's curre[...]
 
 ---
 
