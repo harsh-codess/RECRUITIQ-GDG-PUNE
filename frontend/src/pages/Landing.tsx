@@ -33,7 +33,7 @@ export default function Landing() {
       <Navbar />
 
       {/* TWO-COLUMN LAYOUT WITH ROTATED TRACK LABELS */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-12 md:py-20 flex-grow grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 pt-[60px] pb-12 md:py-20 flex-grow grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
         
         {/* Left rotated tracker strip */}
         <div className="hidden lg:flex lg:col-span-1 flex-col items-center justify-center font-mono text-[9px] font-bold text-[#5F6368] space-y-24 tracking-[0.3em] uppercase select-none border-r border-[#E8EAED] py-12 h-full">
@@ -51,30 +51,20 @@ export default function Landing() {
         {/* Central Display Typography Area */}
         <div className="md:col-span-12 lg:col-span-11 flex flex-col items-start text-left relative pl-0 lg:pl-12">
           
-          {/* Tag Chip top-left */}
-          <motion.div 
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#34A853]/10 border border-[#34A853]/25 text-[#34A853] text-[10px] uppercase font-mono font-bold rounded-full tracking-widest mb-6"
-          >
-            <span className="text-[#34A853]">✦</span> AI-POWERED RESUME EXTRACTION
-          </motion.div>
-
           <div className="relative">
             {/* Google 4-pointed star ✦ floating top-right of wordmark */}
-            <div className="absolute -top-10 right-4 sm:-top-12 sm:right-16 text-[#FBBC04] text-5xl sm:text-6xl animate-bounce">
+            <div className="absolute -top-8 right-2 md:-top-12 md:right-16 text-[#FBBC04] text-[48px] md:text-[64px] animate-bounce pointer-events-none">
               ✦
             </div>
 
-            {/* Giant bold wordmark Recruit IQ */}
+            {/* Giant bold wordmark RecruitIQ */}
             <motion.h1
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.7 }}
-              className="text-6.5xl sm:text-8xl md:text-9.5xl font-sans font-black tracking-tighter leading-[0.85] text-[#202124] select-none"
+              className="text-[64px] md:text-[120px] font-sans font-black tracking-tighter leading-[0.85] text-[#202124] select-none"
             >
-              Recruit <span className="text-[#4285F4]">IQ</span>
+              Recruit<span className="text-[#4285F4]">IQ</span>
             </motion.h1>
           </div>
 
@@ -82,7 +72,7 @@ export default function Landing() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-lg sm:text-2xl font-serif text-[#5F6368] max-w-xl mt-6 font-medium leading-relaxed"
+            className="text-[22px] md:text-[32px] font-serif text-[#5F6368] max-w-[340px] md:max-w-xl mt-6 font-medium leading-[1.3] md:leading-relaxed"
           >
             Rank candidates the way a seasoned recruiter would. Powered by Gemini.
           </motion.p>
@@ -95,10 +85,10 @@ export default function Landing() {
           >
             <Link 
               to="/upload" 
-              className="px-8 py-4 bg-[#4285F4] hover:bg-[#3b78dd] text-white text-sm font-bold font-sans uppercase tracking-wider rounded-full transition-all duration-200 inline-flex items-center gap-2 border-3 border-[#202124]"
+              className="w-full md:w-auto h-[56px] px-8 bg-[#4285F4] hover:bg-[#3b78dd] text-white text-[16px] font-bold font-sans uppercase tracking-wider rounded-full transition-all duration-200 inline-flex items-center justify-center gap-2 border-3 border-[#202124]"
             >
               Start Analyzing Candidates
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-5 h-5 shrink-0" />
             </Link>
           </motion.div>
         </div>
@@ -113,10 +103,10 @@ export default function Landing() {
 
       {/* SECTIONS BELOW HERO: 3-feature row */}
       <section className="bg-[#F8F9FA] border-t-3 border-b-3 border-[#202124] w-full relative z-10 py-16">
-        <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="mb-12">
-            <span className="text-xs uppercase font-mono tracking-widest text-[#5F6368] font-bold block mb-2">✦ HACKATHON CAPABILITIES</span>
-            <h2 className="text-3xl sm:text-4xl font-sans font-black tracking-tight text-[#202124]">
+            <span className="text-xs uppercase font-mono tracking-widest text-[#5F6368] font-bold block mb-2">✦ SYSTEM CAPABILITIES</span>
+            <h2 className="text-[28px] md:text-[48px] font-sans font-black tracking-tight text-[#202124] leading-tight">
               Evaluation Metrics Engine
             </h2>
           </div>
@@ -125,48 +115,48 @@ export default function Landing() {
             
             {/* Feature 01 */}
             <div className="group bg-white p-6 rounded-2xl border-2 border-[#E8EAED] hover:border-[#202124] transition-all relative overflow-hidden">
-              <span className="absolute right-4 bottom-2 text-7xl font-mono font-black text-[#E8EAED] select-none group-hover:text-[#FBBC04]/20 transition-colors">
+              <span className="absolute right-4 top-4 text-7xl font-mono font-black text-[#E8EAED] select-none group-hover:text-[#FBBC04]/20 transition-colors">
                 01
               </span>
               <div className="w-10 h-10 rounded-xl bg-[#4285F4]/10 text-[#4285F4] flex items-center justify-center mb-4 border border-[#4285F4]/20">
                 <BookOpen className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-[#202124] mb-2 uppercase tracking-wide">
+              <h3 className="text-[18px] md:text-[24px] font-bold text-[#202124] mb-2 uppercase tracking-wide">
                 Deep JD Understanding
               </h3>
-              <p className="text-xs text-[#5F6368] leading-relaxed relative z-10">
+              <p className="text-[14px] md:text-[16px] text-[#5F6368] leading-relaxed relative z-10 mr-12">
                 Gemini processes structural requirements, technology layers, and targeted seniority directly from raw prose.
               </p>
             </div>
 
             {/* Feature 02 */}
             <div className="group bg-white p-6 rounded-2xl border-2 border-[#E8EAED] hover:border-[#202124] transition-all relative overflow-hidden">
-              <span className="absolute right-4 bottom-2 text-7xl font-mono font-black text-[#E8EAED] select-none group-hover:text-[#34A853]/20 transition-colors">
+              <span className="absolute right-4 top-4 text-7xl font-mono font-black text-[#E8EAED] select-none group-hover:text-[#34A853]/20 transition-colors">
                 02
               </span>
               <div className="w-10 h-10 rounded-xl bg-[#34A853]/10 text-[#34A853] flex items-center justify-center mb-4 border border-[#34A853]/20">
                 <Layers className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-[#202124] mb-2 uppercase tracking-wide">
+              <h3 className="text-[18px] md:text-[24px] font-bold text-[#202124] mb-2 uppercase tracking-wide">
                 Holistic Scoring
               </h3>
-              <p className="text-xs text-[#5F6368] leading-relaxed relative z-10">
+              <p className="text-[14px] md:text-[16px] text-[#5F6368] leading-relaxed relative z-10 mr-12">
                 Quantitative algorithms evaluate applicant files against objective criteria rather than superficial keyword matching.
               </p>
             </div>
 
             {/* Feature 03 */}
             <div className="group bg-white p-6 rounded-2xl border-2 border-[#E8EAED] hover:border-[#202124] transition-all relative overflow-hidden">
-              <span className="absolute right-4 bottom-2 text-7xl font-mono font-black text-[#E8EAED] select-none group-hover:text-[#EA4335]/20 transition-colors">
+              <span className="absolute right-4 top-4 text-7xl font-mono font-black text-[#E8EAED] select-none group-hover:text-[#EA4335]/20 transition-colors">
                 03
               </span>
               <div className="w-10 h-10 rounded-xl bg-[#EA4335]/10 text-[#EA4335] flex items-center justify-center mb-4 border border-[#EA4335]/20">
                 <Sparkles className="w-5 h-5" />
               </div>
-              <h3 className="text-base font-bold text-[#202124] mb-2 uppercase tracking-wide">
+              <h3 className="text-[18px] md:text-[24px] font-bold text-[#202124] mb-2 uppercase tracking-wide">
                 Explainable Results
               </h3>
-              <p className="text-xs text-[#5F6368] leading-relaxed relative z-10">
+              <p className="text-[14px] md:text-[16px] text-[#5F6368] leading-relaxed relative z-10 mr-12">
                 Get full transparency with key strengths, concerns, and tailored candidate-specific interview question sets.
               </p>
             </div>
@@ -177,19 +167,19 @@ export default function Landing() {
 
       {/* BOTTOM CTA: Full width bold section */}
       <section className="bg-white py-16 relative z-10 border-b border-[#E8EAED]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
+        <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
           <div className="text-[#EA4335] text-2xl mb-4 font-mono">✦ ✦ ✦</div>
-          <h2 className="text-3xl sm:text-5xl font-sans font-black tracking-tight text-[#202124] mb-6">
+          <h2 className="text-[28px] md:text-[48px] font-sans font-black tracking-tight text-[#202124] leading-tight mb-6">
             Ready to find the right candidate?
           </h2>
-          <p className="text-sm text-[#5F6368] max-w-md mx-auto mb-8 font-sans">
+          <p className="text-[14px] md:text-[16px] text-[#5F6368] max-w-md mx-auto mb-8 font-sans">
             Paste target role scopes and parse up to dozens of draft resumes instantly. Get context mapping in seconds.
           </p>
           <Link 
             to="/upload" 
-            className="px-8 py-4 bg-[#4285F4] hover:bg-[#3b78dd] text-white text-xs font-bold font-sans uppercase tracking-widest rounded-full transition-all duration-200 inline-flex items-center gap-1.5 border-2 border-[#202124]"
+            className="w-full md:w-auto h-[56px] px-8 bg-[#4285F4] hover:bg-[#3b78dd] text-white text-[16px] font-bold font-sans uppercase tracking-[0.2em] rounded-full transition-all duration-200 inline-flex items-center justify-center gap-1.5 border-2 border-[#202124]"
           >
-            Start Analyzing <Star className="w-4 h-4 fill-current text-[#FBBC04]" />
+            Start Analyzing <Star className="w-4 h-4 fill-current text-[#FBBC04] shrink-0" />
           </Link>
         </div>
       </section>

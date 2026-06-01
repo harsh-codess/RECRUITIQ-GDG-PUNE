@@ -57,7 +57,7 @@ Company: IIT Bombay Applied AI Incubator
 Location: Mumbai, India
 
 About the Role:
-We seek a senior mathematical researcher to lead our next-generation multimodal embedding project. You will implement direct fine-tuning of sparse-attention layers.
+We seek a mathematical researcher to lead our next-generation multimodal embedding project. You will implement direct fine-tuning of sparse-attention layers.
 
 Required Qualifications:
 - Deep academic and theoretical knowledge of deep learning architectures.

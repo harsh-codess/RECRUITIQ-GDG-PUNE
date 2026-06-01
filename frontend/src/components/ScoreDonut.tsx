@@ -5,7 +5,6 @@ interface ScoreDonutProps {
 }
 
 export default function ScoreDonut({ score }: ScoreDonutProps) {
-  // Select color matching target ranges strictly according to design parameters
   let mainColor = "#34A853"; // Google Green
 
   if (score < 50) {

@@ -19,16 +19,16 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between border-b border-[#E8EAED] bg-white relative z-20">
+    <nav className="w-full max-w-7xl mx-auto px-4 md:px-6 py-4 sm:py-6 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 border-b border-[#E8EAED] bg-white relative z-20">
       
       {/* Brand logo */}
-      <Link to="/" className="flex items-center gap-2 group">
-        <div className="relative flex items-center justify-center w-10 h-10 rounded-full border-2 border-[#202124] bg-white group-hover:bg-[#4285F4] group-hover:text-white transition-all duration-200">
-          <Terminal className="w-5 h-5 text-current" />
+      <Link to="/" className="flex items-center gap-2 group self-start sm:self-auto">
+        <div className="relative flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-[#202124] bg-white group-hover:bg-[#4285F4] group-hover:text-white transition-all duration-200">
+          <Terminal className="w-4 h-4 sm:w-5 sm:h-5 text-current" />
         </div>
         <div>
-          <span className="font-extrabold text-xl tracking-tight text-[#202124]">
-            Recruit <span className="text-[#4285F4]">IQ</span>
+          <span className="font-extrabold text-[18px] tracking-tight text-[#202124]">
+            Recruit<span className="text-[#4285F4]">IQ</span>
           </span>
           <div className="text-[9px] font-mono tracking-widest text-[#5F6368] uppercase font-bold">
             ✦ GDG HACKATHON
@@ -37,25 +37,25 @@ export default function Navbar() {
       </Link>
 
       {/* Nav pill controls */}
-      <div className="flex items-center gap-1.5 p-1 bg-[#F8F9FA] rounded-full border border-[#E8EAED]">
+      <div className="flex flex-row items-center gap-1 p-1 bg-[#F8F9FA] rounded-full border border-[#E8EAED] w-full sm:w-auto justify-between sm:justify-start">
         <Link 
           to="/" 
           id="nav-home"
-          className={`px-4 py-2 text-xs font-bold font-sans rounded-full transition-all duration-200 uppercase tracking-wider ${getPillStyle("/", "yellow")}`}
+          className={`px-3 py-1.5 sm:px-4 sm:py-2 text-[12px] sm:text-xs font-bold font-sans rounded-full transition-all duration-200 uppercase tracking-wider flex-grow sm:flex-initial text-center ${getPillStyle("/", "yellow")}`}
         >
           Home
         </Link>
         <Link 
           to="/upload" 
           id="nav-upload"
-          className={`px-4 py-2 text-xs font-bold font-sans rounded-full transition-all duration-200 uppercase tracking-wider ${getPillStyle("/upload", "blue")}`}
+          className={`px-3 py-1.5 sm:px-4 sm:py-2 text-[12px] sm:text-xs font-bold font-sans rounded-full transition-all duration-200 uppercase tracking-wider flex-grow sm:flex-initial text-center ${getPillStyle("/upload", "blue")}`}
         >
           Upload Studio
         </Link>
         <Link 
           to="/results" 
           id="nav-results"
-          className={`px-4 py-2 text-xs font-bold font-sans rounded-full transition-all duration-200 uppercase tracking-wider ${getPillStyle("/results", "red")}`}
+          className={`px-3 py-1.5 sm:px-4 sm:py-2 text-[12px] sm:text-xs font-bold font-sans rounded-full transition-all duration-200 uppercase tracking-wider flex-grow sm:flex-initial text-center ${getPillStyle("/results", "red")}`}
         >
           Results
         </Link>

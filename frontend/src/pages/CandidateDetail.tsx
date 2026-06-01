@@ -13,13 +13,8 @@ export default function CandidateDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [candidates] = useState<any[]>(() => {
-    const stored = localStorage.getItem("ranked_candidates");
-    return stored ? JSON.parse(stored) : MOCK_CANDIDATES;
-  });
-
-  const currentIndex = candidates.findIndex((c) => c.id === id);
-  const candidate = candidates[currentIndex];
+  const currentIndex = MOCK_CANDIDATES.findIndex((c) => c.id === id);
+  const candidate = MOCK_CANDIDATES[currentIndex];
 
   // Tab State: 'technical' or 'behavioral'
   const [activeTab, setActiveTab] = useState<'technical' | 'behavioral'>('technical');
@@ -57,8 +52,8 @@ export default function CandidateDetail() {
   }
 
   // Next and Previous indexes
-  const prevCandidate = currentIndex > 0 ? candidates[currentIndex - 1] : null;
-  const nextCandidate = currentIndex < candidates.length - 1 ? candidates[currentIndex + 1] : null;
+  const prevCandidate = currentIndex > 0 ? MOCK_CANDIDATES[currentIndex - 1] : null;
+  const nextCandidate = currentIndex < MOCK_CANDIDATES.length - 1 ? MOCK_CANDIDATES[currentIndex + 1] : null;
 
   // Question copy mechanics
   const handleCopyQuestion = (text: string, index: number) => {
@@ -94,7 +89,7 @@ export default function CandidateDetail() {
       <Navbar />
 
       {/* Active profile detail dashboard */}
-      <main className="relative z-10 w-full max-w-7xl mx-auto px-6 py-8 flex-grow">
+      <main className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 py-8 flex-grow">
         
         {/* Back Link Row - Muted, hover Blue */}
         <div className="mb-8">
@@ -328,39 +323,45 @@ export default function CandidateDetail() {
             {candidate.final_recommendation.next_action}
           </button>
 
-          <div className="pt-6 border-t border-[#E8EAED] flex items-center justify-between gap-4">
+          <div className="pt-6 border-t border-[#E8EAED] flex items-center justify-between gap-3 sm:gap-4">
             {/* Previous item button */}
-            <div>
+            <div className="flex-1 sm:flex-initial text-left">
               {prevCandidate ? (
                 <button
                   type="button"
                   onClick={() => navigate(`/candidate/${prevCandidate.id}`)}
-                  className="inline-flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-wider px-5 py-3 bg-white border-2 border-[#E8EAED] hover:border-[#202124] rounded-full transition-all text-[#202124] cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 text-[10px] sm:text-xs font-sans font-bold uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3 bg-white border-2 border-[#E8EAED] hover:border-[#202124] rounded-full transition-all text-[#202124] cursor-pointer"
                 >
-                  <ChevronLeft className="w-4 h-4" />
-                  <span>← Previous Candidate</span>
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                  <span>
+                    <span className="hidden sm:inline">← Previous Candidate</span>
+                    <span className="sm:hidden">← Prev</span>
+                  </span>
                 </button>
               ) : (
-                <div className="text-xs font-mono text-gray-400 select-none px-4 py-2">
-                  First Candidate reached
+                <div className="text-[10px] sm:text-xs font-mono text-gray-400 select-none px-2 py-1">
+                  First Candidate
                 </div>
               )}
             </div>
 
             {/* Next item button */}
-            <div>
+            <div className="flex-1 sm:flex-initial text-right">
               {nextCandidate ? (
                 <button
                   type="button"
                   onClick={() => navigate(`/candidate/${nextCandidate.id}`)}
-                  className="inline-flex items-center gap-2 text-xs font-sans font-bold uppercase tracking-wider px-5 py-3 bg-white border-2 border-[#E8EAED] hover:border-[#202124] rounded-full transition-all text-[#202124] cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 text-[10px] sm:text-xs font-sans font-bold uppercase tracking-wider px-3 py-2.5 sm:px-5 sm:py-3 bg-white border-2 border-[#E8EAED] hover:border-[#202124] rounded-full transition-all text-[#202124] cursor-pointer"
                 >
-                  <span>Next Candidate →</span>
-                  <ChevronRight className="w-4 h-4" />
+                  <span>
+                    <span className="hidden sm:inline">Next Candidate →</span>
+                    <span className="sm:hidden">Next →</span>
+                  </span>
+                  <ChevronRight className="w-3.5 h-3.5" />
                 </button>
               ) : (
-                <div className="text-xs font-mono text-gray-400 select-none px-4 py-2">
-                  Last Candidate reached
+                <div className="text-[10px] sm:text-xs font-mono text-gray-400 select-none px-2 py-1">
+                  Last Candidate
                 </div>
               )}
             </div>

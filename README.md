@@ -149,7 +149,7 @@ The test block covers:
 
 Built at the **Google Developer Groups Hackathon — Pune 2026**  
 Theme: *AI-Powered Developer Tools using Google AI Stack*  
-Stack: `Gemini 1.5 Flash`, `FastAPI`, `Streamlit`, `pdfplumber`, `Python`
+Stack: `Gemini 3.5 Flash`, `FastAPI`, `Streamlit`, `pdfplumber`, `Python`
 
 ---
 

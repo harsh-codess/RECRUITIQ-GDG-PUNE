@@ -4,35 +4,27 @@ import { motion, AnimatePresence } from "motion/react";
 import { Sliders, RotateCw, Filter, Shield, Info, ArrowUpRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import CandidateCard from "../components/CandidateCard";
-import { MOCK_CANDIDATES, Candidate } from "../data/mockCandidates";
+import { MOCK_CANDIDATES } from "../data/mockCandidates";
 
 export default function ResultsDashboard() {
   // Retain the JD title from storage
   const [jdTitle, setJdTitle] = useState("Senior Machine Learning Engineer");
   const [jdCompany, setJdCompany] = useState("Flipkart");
-  const [scoreThreshold, setScoreThreshold] = useState(60); // Default threshold parameter in instructions is 60
-  const [candidates, setCandidates] = useState<Candidate[]>([]);
+  const [scoreThreshold, setScoreThreshold] = useState(60); 
 
   useEffect(() => {
     const title = localStorage.getItem("active_jd_title");
     const company = localStorage.getItem("active_jd_company");
     if (title) setJdTitle(title);
     if (company) setJdCompany(company);
-
-    const stored = localStorage.getItem("ranked_candidates");
-    if (stored) {
-      setCandidates(JSON.parse(stored));
-    } else {
-      setCandidates(MOCK_CANDIDATES);
-    }
   }, []);
 
   // Filter & sort candidates by score descending
-  const filteredCandidates = candidates.filter((c) => c.scores.overall_score >= scoreThreshold);
+  const filteredCandidates = MOCK_CANDIDATES.filter((c) => c.scores.overall_score >= scoreThreshold);
   const sortedCandidates = [...filteredCandidates].sort((a, b) => b.scores.overall_score - a.scores.overall_score);
 
   // Stats
-  const totalOriginalCount = candidates.length;
+  const totalOriginalCount = MOCK_CANDIDATES.length;
   const passedCount = filteredCandidates.length;
 
   return (
@@ -46,33 +38,34 @@ export default function ResultsDashboard() {
       <Navbar />
 
       {/* Results Workspace Panel */}
-      <main className="relative z-10 w-full max-w-7xl mx-auto px-6 py-8 flex-grow">
+      <main className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 py-8 flex-grow">
         
         {/* HEADER AREA */}
-        <div className="border-3 border-[#202124] bg-[#F8F9FA] rounded-3xl p-6 md:p-8 relative mb-8 overflow-hidden">
+        <div className="border-3 border-[#202124] bg-[#F8F9FA] rounded-3xl p-4 sm:p-8 relative mb-8 overflow-hidden">
           
           {/* Decorative large ✦ top right */}
-          <div className="absolute top-4 right-6 text-6xl text-[#FBBC04] uppercase font-bold tracking-widest select-none select-none animate-bounce">
+          <div className="absolute top-4 right-6 text-4xl sm:text-6xl text-[#FBBC04] uppercase font-bold tracking-widest select-none opacity-20 sm:opacity-100 pointer-events-none animate-bounce">
             ✦
           </div>
 
-          <div className="flex flex-col gap-3 relative z-10 max-w-2xl">
+          <div className="flex flex-col gap-3 relative z-10 w-full">
             <span className="text-xs uppercase font-mono tracking-widest text-[#5F6368] font-black">
               ✦ GDG HACKATHON LIVE LEADERBOARD
             </span>
             
-            {/* Exactly: Role title in bold Blue | X candidates analyzed | 2.4s time badge */}
-            <h1 className="text-2xl sm:text-4xl font-sans font-black tracking-tight leading-none text-[#202124]">
-              <span className="text-[#4285F4]">{jdTitle}</span>{" "}
-              <span className="text-lg sm:text-2xl font-serif text-[#5F6368] font-normal mx-2 md:mx-3">|</span>{" "}
-              <span className="text-sm sm:text-lg font-mono text-[#5F6368] font-normal">
-                {totalOriginalCount} candidates analyzed
-              </span>{" "}
-              <span className="text-lg font-serif text-[#5F6368] font-normal mx-1">|</span>{" "}
-              <span className="inline-flex items-center text-[11px] font-mono font-bold bg-[#FBBC04]/20 text-[#202124] px-2.5 py-1 rounded border border-[#FBBC04]/40 uppercase tracking-widest">
-                2.4s Time Badge
-              </span>
-            </h1>
+            <div className="flex flex-col gap-3">
+              <h1 className="text-2xl sm:text-4xl font-sans font-black tracking-tight text-[#4285F4] leading-tight">
+                {jdTitle}
+              </h1>
+              
+              <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs sm:text-sm font-mono text-[#5F6368]">
+                <span>{totalOriginalCount} candidates analyzed</span>
+                <span className="text-[#E8EAED] hidden sm:inline">|</span>
+                <span className="inline-flex items-center text-[10px] sm:text-[11px] font-mono font-bold bg-[#FBBC04]/20 text-[#202124] px-2 py-0.5 sm:px-2.5 sm:py-1 rounded border border-[#FBBC04]/40 uppercase tracking-widest">
+                  2.4s Time Badge
+                </span>
+              </div>
+            </div>
 
             <p className="text-xs text-[#5F6368] font-serif mt-1">
               Currently evaluating dossier against specifications published for <span className="font-sans font-bold text-[#202124]">{jdCompany}</span>.
@@ -149,8 +142,7 @@ export default function ResultsDashboard() {
               </motion.div>
             ) : (
               sortedCandidates.map((cand, index) => {
-                // Determine the logical ranking rank number based on overall sorted position in candidates
-                const globalRankNum = candidates.findIndex(c => c.id === cand.id) + 1;
+                const globalRankNum = MOCK_CANDIDATES.findIndex(c => c.id === cand.id) + 1;
 
                 return (
                   <CandidateCard
@@ -161,7 +153,7 @@ export default function ResultsDashboard() {
                     score={cand.scores.overall_score}
                     verdict={cand.final_recommendation.verdict}
                     oneLiner={cand.final_recommendation.one_liner}
-                    rankIndex={globalRankNum} // Maps nicely to formatted global index
+                    rankIndex={globalRankNum}
                   />
                 );
               })
