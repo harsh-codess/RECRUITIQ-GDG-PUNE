@@ -1,23 +1,61 @@
-# Dependencies
+# ── Node / Frontend ───────────────────────────────────────
 node_modules/
 .pnp
 .pnp.js
 
-# Build outputs
+# ── Build outputs ─────────────────────────────────────────
 dist/
 build/
 out/
 .next/
 .nuxt/
+*.tsbuildinfo
+vite.config.ts.timestamp*
 
-# Environment files
+# ── Vite cache ────────────────────────────────────────────
+.vite/
+
+# ── Environment files ─────────────────────────────────────
 .env
 .env.local
 .env.*.local
 .env.development
 .env.production
+.env.*
+*.key
+secrets.json
 
-# Logs
+# ── Python ────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg
+*.egg-info/
+.eggs/
+*.whl
+.Python
+dist-info/
+
+# ── Virtual environments ───────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+
+# ── pytest / coverage / testing ───────────────────────────
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+coverage/
+.nyc_output/
+
+# ── Jupyter ────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Logs ──────────────────────────────────────────────────
 logs/
 *.log
 npm-debug.log*
@@ -25,11 +63,14 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 
-# OS files
+# ── OS files ──────────────────────────────────────────────
 .DS_Store
+.AppleDouble
+.LSOverride
+._*
 Thumbs.db
 
-# Editor files
+# ── Editor / IDE ──────────────────────────────────────────
 .vscode/
 .idea/
 *.suo
@@ -37,23 +78,10 @@ Thumbs.db
 *.njsproj
 *.sln
 *.sw?
+*.swp
+*.swo
 
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-.Python
-venv/
-env/
-.venv/
-*.egg-info/
-dist-info/
-
-# Vite / TypeScript
-*.tsbuildinfo
-vite.config.ts.timestamp*
-
-# Testing
-coverage/
-.nyc_output/
+# ── Uploaded / temporary files ────────────────────────────
+uploads/
+tmp/
+temp/
