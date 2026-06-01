@@ -4,27 +4,46 @@ import { motion, AnimatePresence } from "motion/react";
 import { Sliders, RotateCw, Filter, Shield, Info, ArrowUpRight } from "lucide-react";
 import Navbar from "../components/Navbar";
 import CandidateCard from "../components/CandidateCard";
-import { MOCK_CANDIDATES } from "../data/mockCandidates";
+import { MOCK_CANDIDATES, Candidate } from "../data/mockCandidates";
 
 export default function ResultsDashboard() {
   // Retain the JD title from storage
   const [jdTitle, setJdTitle] = useState("Senior Machine Learning Engineer");
   const [jdCompany, setJdCompany] = useState("Flipkart");
-  const [scoreThreshold, setScoreThreshold] = useState(60); 
+  const [scoreThreshold, setScoreThreshold] = useState(60);
+  const [candidates, setCandidates] = useState<Candidate[]>(MOCK_CANDIDATES);
 
   useEffect(() => {
     const title = localStorage.getItem("active_jd_title");
     const company = localStorage.getItem("active_jd_company");
     if (title) setJdTitle(title);
     if (company) setJdCompany(company);
+
+    const stored = localStorage.getItem("recruiteriq_results");
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored);
+        const incoming = Array.isArray(parsed?.candidates) ? parsed.candidates : [];
+        if (incoming.length > 0) {
+          const normalized = incoming.map((cand: Candidate, index: number) => ({
+            ...cand,
+            id: cand.id || `cand-${index + 1}`
+          }));
+          setCandidates(normalized);
+          return;
+        }
+      } catch {
+        // Fall back to mock data on parse failure.
+      }
+    }
   }, []);
 
   // Filter & sort candidates by score descending
-  const filteredCandidates = MOCK_CANDIDATES.filter((c) => c.scores.overall_score >= scoreThreshold);
+  const filteredCandidates = candidates.filter((c) => c.scores.overall_score >= scoreThreshold);
   const sortedCandidates = [...filteredCandidates].sort((a, b) => b.scores.overall_score - a.scores.overall_score);
 
   // Stats
-  const totalOriginalCount = MOCK_CANDIDATES.length;
+  const totalOriginalCount = candidates.length;
   const passedCount = filteredCandidates.length;
 
   return (
@@ -142,7 +161,7 @@ export default function ResultsDashboard() {
               </motion.div>
             ) : (
               sortedCandidates.map((cand, index) => {
-                const globalRankNum = MOCK_CANDIDATES.findIndex(c => c.id === cand.id) + 1;
+                const globalRankNum = candidates.findIndex(c => c.id === cand.id) + 1;
 
                 return (
                   <CandidateCard
