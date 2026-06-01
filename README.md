@@ -20,7 +20,13 @@ The system doesn't just match keywords. It understands context, infers candidate
 ## 🚀 Live Demo (POC)
 
 > ▶️ **Screen Recording** — see the full end-to-end flow:
-> [`IMAGES/Screen Recording 2026-05-31 at 10.21.21 PM.mov`](./IMAGES/Screen%20Recording%202026-05-31%20at%2010.21.21%E2%80%AFPM.mov)
+> ▶️ **Screen Recording** — see the full end-to-end flow:
+
+> <video controls width="720" height="405" poster="./IMAGES/ss1.png">
+>   <source src="./IMAGES/Screen%20Recording%202026-05-31%20at%2010.21.21%20PM.mov" type="video/quicktime">
+>   Your browser does not support the video tag. Click to download/play:
+>   [`IMAGES/Screen Recording 2026-05-31 at 10.21.21 PM.mov`](./IMAGES/Screen%20Recording%202026-05-31%20at%2010.21.21%20PM.mov)
+> </video>
 
 ---
 
