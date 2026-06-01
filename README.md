@@ -20,25 +20,24 @@ The system doesn't just match keywords. It understands context, infers candidate
 ## 🚀 Live Demo (POC)
 
 > ▶️ **Screen Recording** — see the full end-to-end flow:
-> ▶️ **Screen Recording** — see the full end-to-end flow:
 
-> [![Play Screen Recording](./IMAGES/ss1.png)](./IMAGES/Screen%20Recording%202026-05-31%20at%2010.21.21%20PM.mov)
+> [![Play Screen Recording](./assets/ss1.png)](./assets/POC.mp4)
 
-> Click to download/play: [`IMAGES/Screen Recording 2026-05-31 at 10.21.21 PM.mov`](./IMAGES/Screen%20Recording%202026-05-31%20at%2010.21.21%20PM.mov)
+> Click to download/play: [`assets/POC.mp4`](./assets/POC.mp4)
 
 ---
 
 ## 🖥️ Screenshots
 
 ### Upload Studio — Configure JD & Upload Resumes
-![Upload Studio](./IMAGES/ss1.png)
+![Upload Studio](./assets/ss1.png)
 
 > The recruiter pastes the full Job Description (or uses a quick-seed template for roles like *Senior ML Engineer at Flipkart* or *Lead AI Researcher at IIT Bombay Hub*), then uploads a batch of candidate PDF resumes. The system confirms readiness before triggering evaluation.
 
 ---
 
 ### Results — Ranked Candidate Leaderboard
-![Ranked Leaderboard](./IMAGES/ss2.png)
+![Ranked Leaderboard](./assets/ss2.png)
 
 > After Gemini evaluates each candidate, the leaderboard shows candidates ranked by AI score with verdicts like **Strong Hire (91%)**, **Hire (87%)**, etc. Each card includes the candidate's current role, a one-liner AI evaluation, and a "View Details" button for the full breakdown.
 
@@ -58,7 +57,7 @@ The system is a 7-step pipeline:
 | 6 | `main.py` (FastAPI Backend) | Returns ranked candidates JSON to frontend |
 | 7 | `app.py` (Streamlit Frontend) | Renders ranked candidate cards with score, verdict, one-liner |
 
-![System Architecture](./IMAGES/ARCHITECTURE.png)
+![System Architecture](./assets/ARCHITECTURE.png)
 
 ---
 
@@ -67,11 +66,11 @@ The system is a 7-step pipeline:
 ```
 APL-GDG-PUNE/
 ├── scorer.py              # ⭐ Candidate ranking engine (this repo)
-├── IMAGES/
+├── assets/
 │   ├── ARCHITECTURE.png   # Full system architecture diagram
 │   ├── ss1.png            # Upload Studio screenshot
 │   ├── ss2.png            # Results leaderboard screenshot
-│   └── Screen Recording…  # End-to-end POC video
+│   └── POC.mp4            # End-to-end POC video
 └── README.md
 ```
 
