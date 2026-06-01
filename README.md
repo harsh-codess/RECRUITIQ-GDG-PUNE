@@ -21,7 +21,7 @@ The system doesn't just match keywords. It understands context, infers candidate
 
 ▶️ **Screen Recording** — see the full end-to-end flow:
 
-[![RecruiterAI Demo](https://img.youtube.com/vi/I4NXQKvVa-0/maxresdefault.jpg)](https://youtu.be/I4NXQKvVa-0)
+[![RecruiterAI Demo](https://img.youtube.com/vi/I4NXQKvVa-0/0.jpg)](https://youtu.be/I4NXQKvVa-0)
 
 ---
 
