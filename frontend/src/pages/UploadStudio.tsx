@@ -91,7 +91,7 @@ export default function UploadStudio() {
       formData.append("company", company || "Custom Client");
       resumes.forEach((resume) => formData.append("resumes", resume.file));
 
-      const response = await fetch("http://localhost:8000/api/analyze", {
+      const response = await fetch("https://recruitiq-gdg-pune.onrender.com/api/analyze", {
         method: "POST",
         body: formData
       });
